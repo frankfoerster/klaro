@@ -20,9 +20,17 @@ import {t, language} from 'utils/i18n'
 
 const script = currentScript("klaro");
 const convertedTranslations = convertToMap(translations)
-const configName = script.getAttribute('data-config') || "klaroConfig"
-const noAutoLoad = script.getAttribute('data-no-auto-load') === "true"
-const stylePrefix = script.getAttribute('data-style-prefix') || "klaro"
+const options = {
+    configName: "klaroConfig",
+    noAutoLoad: false,
+    stylePrefix: "klaro"
+}
+if (script) {
+    options.configName = script.getAttribute('data-config') || "klaroConfig"
+    options.noAutoLoad = script.getAttribute('data-no-auto-load') === "true"
+    options.stylePrefix = script.getAttribute('data-style-prefix') || "klaro"
+}
+const { configName, noAutoLoad, stylePrefix } = options
 const config = window[configName]
 const managers = {}
 
